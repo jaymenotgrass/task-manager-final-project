@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Django Project</title>
+</head>
+<body>
+
+<nav>
+    <ul>
+        {% if user.is_authenticated %}
+            <li><a href="{% url 'profile' %}">Profile</a></li>  <!-- Link to the profile page -->
+            <li><a href="{% url 'logout' %}">Logout</a></li>   <!-- Link to the logout view -->
+        {% else %}
+            <li><a href="{% url 'login' %}">Login</a></li>      <!-- Link to the login page -->
+        {% endif %}
+    </ul>
+</nav>
+
+<h1>Hello World!</h1>
+<p>Welcome to my first Django project!</p>
+
+</body>
+</html>
