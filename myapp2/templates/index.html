@@ -1,23 +1,54 @@
 <!DOCTYPE html>
-<html>
-<head>
-    <title>My Django Project</title>
-</head>
-<body>
+{% extends "base.html" %}
+{% block content %}
+  <section class="hero-section">
+    {% if user.is_authenticated %}
+        <h1>Welcome back, {{ user.get_full_name}}!</h1>
 
-<nav>
-    <ul>
-        {% if user.is_authenticated %}
-            <li><a href="{% url 'profile' %}">Profile</a></li>  <!-- Link to the profile page -->
-            <li><a href="{% url 'logout' %}">Logout</a></li>   <!-- Link to the logout view -->
+    {% if total_tasks > 0 %}
+        {% if pending_tasks|length == 0 %}
+        <p>You're all caught up! Create a new task: <a href="{% url 'task_create' %}">Create!</a></p>
         {% else %}
-            <li><a href="{% url 'login' %}">Login</a></li>      <!-- Link to the login page -->
+            <p>You're doing great! Here are your pending tasks:</p>
+            <ul>
+                {% for task in pending_tasks %}
+                    <li>{{ task.title }} - Pending</li>
+                {% endfor %}
+                <p>Create another task! <a href="{% url 'task_create' %}">Create</a></p>
+                <p> View all your tasks! <a href="{% url 'task_list' %}"> View </a></p>
+
+            </ul>
         {% endif %}
-    </ul>
-</nav>
+    {% else %}
+    <p>You have no tasks, add a new task! <a href="{% url 'task_create' %}">Create</a></p>
+{% endif %}
+    
+    {% else %}
+      <h1>Welcome to Your Task Manager</h1>
+      <p>Keep track of your tasks and stay productive. Sign up today!</p>
+      <a href="{% url 'register' %}" class="cta-button">Sign Up</a>
+      <a href="{% url 'login' %}" class="cta-button">Log In</a>
+    {% endif %}
+  </section>
 
-<h1>Hello World!</h1>
-<p>Welcome to my first Django project!</p>
+  <section class="features-section">
+    <h2>Features</h2>
+    <p>Manage your tasks, set deadlines, and stay organized.</p>
+    <div class="feature-cards">
+      <div class="feature-card">
+        <h3>Task Tracking</h3>
+        <p>Keep track of your tasks and deadlines.</p>
+      </div>
+      <div class="feature-card">
+        <h3>Organize Tasks</h3>
+        <p>Organize your tasks by priority and due dates.</p>
+      </div>
+      <div class="feature-card">
+        <h3>Progress Visualization</h3>
+        <p>Get a visual summary of your progress over time.</p>
+      </div>
+    </div>
+  </section>
+{% endblock %}
 
-</body>
-</html>
+{

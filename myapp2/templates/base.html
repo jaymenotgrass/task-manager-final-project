@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}My Django App{% endblock %}</title>
+    <!-- Include CSS/JS here -->
+</head>
+<body>
+    <header>
+        <h1>My Task Manager</h1>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+        
+
+                {% if user.is_authenticated %}
+                    <li><a href="/profile">Profile</a></li> <!-- Only show for logged-in users -->
+                    <li><a href="/task/list"> Task List </a></li>
+                    <li><a href="/logout">Log Out</a></li> <!-- Only show for logged-in users -->
+                {% else %}
+                    <li><a href="/login">Log In</a></li> <!-- Only show for unauthenticated users -->
+                    <li><a href="/register">Sign Up</a></li> <!-- Only show for unauthenticated users -->
+                {% endif %}
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        {% block content %}
+        <!-- Page-specific content will go here -->
+        {% endblock %}
+    </main>
+
+    <footer>
+        <p>&copy; 2025 My Task Manager</p>
+    </footer>
+</body>
+</html>

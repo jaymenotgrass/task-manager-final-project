@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+<main>
+    {% block content %}
+    <h1>Your Tasks</h1>
+    <a href="{% url 'task_create' %}">Create New Task</a>
+
+    <h2>Completed Tasks</h2>
+
+    {% if completed_tasks %}
+            <ul>
+                {% for task in completed_tasks %}
+                    <li>
+                        <p><strong>{{ task.title }}</strong>: {{ task.description }}</p>
+                        <a href="{% url 'task_edit' task.id %}" class="edit-btn">Edit</a>
+                        <a href="{% url 'task_delete' task.id %}" class="delete-btn">Delete</a>
+                    </li>
+                {% endfor %}
+            </ul>
+    {% else %}
+            <p>No completed tasks yet.</p>
+        {% comment %} <p>You don't have any tasks yet. <a href="{% url 'task_create' %}">Create one now!</a></p> {% endcomment %}
+    {% endif %}
+    <h2>Pending Tasks</h2>
+
+    {% if pending_tasks %}
+            <ul>
+                {% for task in pending_tasks %}
+                    <li>
+                        <p><strong>{{ task.title }}</strong>: {{ task.description }}</p>
+                        <a href="{% url 'task_edit' task.id %}" class="edit-btn">Edit</a>
+                        <a href="{% url 'task_delete' task.id %}" class="delete-btn">Delete</a>
+                    </li>
+                {% endfor %}
+            </ul>
+    {% else %}
+            <p>You're all caught up! Create a new task: <a href="{% url 'task_create' %}">Create!</a></p>
+    {% endif %}
+    {% endblock %}
+</main>
+ 
