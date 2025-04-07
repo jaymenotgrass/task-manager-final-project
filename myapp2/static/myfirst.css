@@ -1,0 +1,113 @@
+nav{
+  background-color: gray;
+  color: lightblue;
+  
+}
+nav a{
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  
+}
+nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+}
+nav li{
+  /*display: inline;*/
+  float: left;
+  border-right: 1px solid #bbb;
+}
+nav li a:hover{
+  background-color: #111;
+}
+.cta-container {
+  text-align: center;  /* Center the content */
+  padding: 50px 20px;  /* Space around the content */
+  background-color: #f7f7f7;  /* Soft background color */
+  border-radius: 8px;  /* Rounded corners for the section */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  /* Light shadow for depth */
+  max-width: 800px;  /* Limit width of the section */
+  margin: 50px auto;  /* Center it on the page */
+}
+
+/* Style for the Heading */
+.cta-container h1 {
+  font-size: 2.5rem;  /* Make the heading large */
+  font-weight: bold;  /* Bold for emphasis */
+  color: #333;  /* Dark grey color */
+  margin-bottom: 20px;  /* Add space below the heading */
+}
+
+/* Style for the Paragraph */
+.cta-container p {
+  font-size: 1.2rem;  /* Slightly larger text for readability */
+  color: #555;  /* Lighter grey for the paragraph */
+  line-height: 1.6;  /* More space between lines */
+  margin-bottom: 30px;  /* Space below the paragraph */
+}
+
+/* Style for the CTA button */
+.cta-button {
+  display: inline-block;  /* Make it an inline button */
+  padding: 15px 30px;  /* Add padding inside the button */
+  background-color: #007BFF;  /* Blue background */
+  color: #fff;  /* White text */
+  font-size: 1.1rem;  /* Slightly larger text */
+  font-weight: 600;  /* Make the text bold */
+  text-decoration: none;  /* Remove underline from the link */
+  border-radius: 30px;  /* Rounded corners for the button */
+  transition: all 0.3s ease-in-out;  /* Smooth transition for hover effect */
+}
+
+.cta-button:hover {
+  background-color: #0056b3;  /* Darker blue when hovering */
+  transform: translateY(-3px);  /* Slight lift effect when hovering */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);  /* Shadow on hover */
+}
+
+.cta-button:active {
+  transform: translateY(1px);  /* Button "pressed" effect */
+}
+.features-section {
+    padding: 20px;
+    background-color: red;
+    text-align: center;
+  }
+  
+  .feature-card {
+    background-color: lightblue;
+    border: 1px solid #ddd;
+    padding: 15px;
+    margin: 10px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .feature-cards {
+    display: grid;
+    grid-template-columns: repeat(2, 2fr);
+    gap: 20px;
+  }
+  
+  .feature-card h3 {
+    color: #333;
+    font-size: 1.2em;
+    margin-bottom: 10px;
+  }
+  
+  .feature-card p {
+    color: #666;
+    font-size: 1em;
+  }
+  
+  .features-section h2 {
+    font-size: 2em;
+    color: #222;
+  }
+  

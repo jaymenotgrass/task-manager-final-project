@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 {% extends "base.html" %}
+
 {% block content %}
+
   <section class="hero-section">
     {% if user.is_authenticated %}
         <h1>Welcome back, {{ user.get_full_name}}!</h1>
@@ -24,31 +26,34 @@
 {% endif %}
     
     {% else %}
-      <h1>Welcome to Your Task Manager</h1>
+    <div class="cta-container">
+      <h1>Task Your Life, One Step At a Time</h1>
       <p>Keep track of your tasks and stay productive. Sign up today!</p>
-      <a href="{% url 'register' %}" class="cta-button">Sign Up</a>
-      <a href="{% url 'login' %}" class="cta-button">Log In</a>
+      <a href="{% url 'register' %}" class="cta-button">Create Account!</a>
+    </div>
+      
     {% endif %}
   </section>
 
   <section class="features-section">
-    <h2>Features</h2>
-    <p>Manage your tasks, set deadlines, and stay organized.</p>
+    
     <div class="feature-cards">
       <div class="feature-card">
-        <h3>Task Tracking</h3>
+        <h2>Features</h2>
+        <p>Manage your tasks, set deadlines, and stay organized.</p>
+      </div>
+      <div class="feature-card">
+        <h2>Task Tracking</h2>
         <p>Keep track of your tasks and deadlines.</p>
       </div>
       <div class="feature-card">
-        <h3>Organize Tasks</h3>
+        <h2>Organize Tasks</h2>
         <p>Organize your tasks by priority and due dates.</p>
       </div>
       <div class="feature-card">
-        <h3>Progress Visualization</h3>
+        <h2>Progress Visualization</h2>
         <p>Get a visual summary of your progress over time.</p>
       </div>
     </div>
   </section>
 {% endblock %}
-
-{

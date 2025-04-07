@@ -1,3 +1,4 @@
+from django.http import JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import authenticate, login as auth_login, logout
@@ -119,6 +120,7 @@ def task_edit(request, id):
 def task_delete(request, id):
     task = get_object_or_404(Task, id=id, user=request.user)
     if request.method == 'POST':
-        task.delete()
-        return redirect('task_list')
-    return render(request, 'task_confirm_delete.html', {'task': task})
+        task.delete()  # Delete the task
+        return redirect('task_list')  # Redirect to a list of tasks after deletion
+    return render(request, 'task_confirm_delete.html', {'task': task})  # Render the confirmation page
+

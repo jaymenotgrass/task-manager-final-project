@@ -3,12 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}My Django App{% endblock %}</title>
+    <form method="POST">
+        {% csrf_token %}
+    </form>
+    <title>{% block title %}Task Your Life{% endblock %}</title>
     <!-- Include CSS/JS here -->
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'myfirst.css' %}">
 </head>
 <body>
     <header>
-        <h1>My Task Manager</h1>
+        
         <nav>
             <ul>
                 <li><a href="/">Home</a></li>
@@ -17,10 +22,10 @@
                 {% if user.is_authenticated %}
                     <li><a href="/profile">Profile</a></li> <!-- Only show for logged-in users -->
                     <li><a href="/task/list"> Task List </a></li>
-                    <li><a href="/logout">Log Out</a></li> <!-- Only show for logged-in users -->
+                    <li style="float:right"><a href="/logout">Log Out</a></li> <!-- Only show for logged-in users -->
                 {% else %}
-                    <li><a href="/login">Log In</a></li> <!-- Only show for unauthenticated users -->
-                    <li><a href="/register">Sign Up</a></li> <!-- Only show for unauthenticated users -->
+                    <li style="float:right"><a href="/login">Log In</a></li> <!-- Only show for unauthenticated users -->
+                    <li style="float:right"><a href="/register">Sign Up</a></li> <!-- Only show for unauthenticated users -->
                 {% endif %}
             </ul>
         </nav>
@@ -35,5 +40,7 @@
     <footer>
         <p>&copy; 2025 My Task Manager</p>
     </footer>
+    <script src="{%static 'script.js'%}"></script>
+
 </body>
 </html>
