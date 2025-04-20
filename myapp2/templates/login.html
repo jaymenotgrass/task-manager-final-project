@@ -1,19 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-</head>
-<body>
+{% extends "base.html" %}
+{% block navbar %}
+  <nav>
+    <ul>
+      <li><a href="/">← Back to Home</a></li>
+    </ul>
+  </nav>
+{% endblock %}
+{% block content %}
+
+<div class="auth-container">
+  <div class="auth-box">
     <h2>Login</h2>
-
     <form method="POST">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Login</button>
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit" class="btn-primary">Login</button>
+      <p>Don't have an account? <a href="{% url 'register' %}">Register here</a></p>
     </form>
-
-    <p>Don't have an account? <a href="{% url 'register' %}">Register here</a></p>
-</body>
-</html>
+  </div>
+</div>
+{% endblock %}

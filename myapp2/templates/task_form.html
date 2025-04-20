@@ -1,6 +1,10 @@
-<h1>{% if form.instance.id %}Edit{% else %}Create{% endif %} Task</h1>
-<form method="POST">
+{% load static %}
+<link rel="stylesheet" href="{% static 'myfirst.css' %}">
+
+<h1 class="form-title">{% if form.instance.id %}Edit{% else %}Create{% endif %} Task</h1>
+
+<form method="POST" class="task-form">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit">Save</button>
+    <button type="submit" class="btn btn-primary">Save</button>
 </form>

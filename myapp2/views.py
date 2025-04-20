@@ -85,11 +85,12 @@ def task_list(request):
     # Query for completed and pending tasks
     completed_tasks = Task.objects.filter(user=user, completed=True)
     pending_tasks = Task.objects.filter(user=user, completed=False)
-
+    form = TaskForm()
     # Pass these to the template context
     context = {
         'completed_tasks': completed_tasks,
         'pending_tasks': pending_tasks,
+        'form': form,
     }
 
     return render(request, 'task_list.html', context)

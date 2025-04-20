@@ -1,73 +1,84 @@
 {% extends "base.html" %}
 
-<main>
-    {% block content %}
-    <h1>Your Tasks</h1>
-    <a href="{% url 'task_create' %}">Create New Task</a>
-    <div class="search-bar">
-        <input type="text" id="task-search" placeholder="Search for a task..." onkeyup="filterTasks()">
+{% block content %}
+<main class="task-page">
+
+    <div class="task-header">
+        <h1>Your Tasks</h1>
+        <a href="{% url 'task_create' %}" class="cta-button">Create New Task</a>
     </div>
 
-    <h2>Completed Tasks</h2>
+    <div class="search-bar-container">
+        <input type="text" id="task-search" class="search-bar" placeholder="Search for a task..." onkeyup="filterTasks()">
+    </div>
 
-    {% if completed_tasks %}
-            <ul>
-                {% for task in completed_tasks %}
-                    <li  class="task-item" data-name="{{ task.title }}" data-description="{{ task.description }}">
-                        <p><strong>{{ task.title }}</strong>: {{ task.description }}</p>
-                        <a href="{% url 'task_edit' task.id %}" class="edit-btn">Edit</a>
-                        <a href="{% url 'task_delete' task.id %}" class="delete-btn">Delete</a> 
-                    </li>
-                {% endfor %}
-            </ul>
-    {% else %}
-            <p>No completed tasks yet.</p>
-        {% comment %} <p>You don't have any tasks yet. <a href="{% url 'task_create' %}">Create one now!</a></p> {% endcomment %}
-    {% endif %}
-    <h2>Pending Tasks</h2>
+    <div class="task-container">
+        
+        <!-- Completed Tasks -->
+        <div class="task-box completed-tasks-box">
+            <h2>Completed Tasks</h2>
+            {% if completed_tasks %}
+                <ul class="task-list">
+                    {% for task in completed_tasks %}
+                        <li class="task-item" data-name="{{ task.title }}" data-description="{{ task.description }}">
+                            <div class="task-content">
+                                <p><strong>{{ task.title }}</strong>: {{ task.description }}</p>
+                            </div>
+                            <div class="task-actions">
+                                <a href="{% url 'task_edit' task.id %}" class="btn btn-secondary">Edit</a>
+                                <a href="{% url 'task_delete' task.id %}" class="btn btn-danger" data-task-id="{{ task.id }}">Delete</a>
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>No completed tasks yet.</p>
+            {% endif %}
+        </div>
 
-    {% if pending_tasks %}
-            <ul>
-                {% for task in pending_tasks %}
-                    <li  class="task-item" data-name="{{ task.title }}" data-description="{{ task.description }}">
-                        <p><strong>{{ task.title }}</strong>: {{ task.description }}</p>
-                        <a href="{% url 'task_edit' task.id %}" class="edit-btn">Edit</a>
-                        <a href="{% url 'task_delete' task.id %}" class="delete-btn">Delete</a> 
-                    </li>
-                {% endfor %}
-            </ul>
-    {% else %}
-            <p>You're all caught up! Create a new task: <a href="{% url 'task_create' %}">Create!</a></p>
-    {% endif %}
-    {% endblock %}
+        <!-- Pending Tasks -->
+        <div class="task-box pending-tasks-box">
+            <h2>Pending Tasks</h2>
+            {% if pending_tasks %}
+                <ul class="task-list">
+                    {% for task in pending_tasks %}
+                        <li class="task-item" data-name="{{ task.title }}" data-description="{{ task.description }}">
+                            <div class="task-content">
+                                <p><strong>{{ task.title }}</strong>: {{ task.description }}</p>
+                            </div>
+                            <div class="task-actions">
+                                <a href="{% url 'task_edit' task.id %}" class="btn btn-secondary">Edit</a>
+                                <a href="{% url 'task_delete' task.id %}" class="btn btn-danger" data-task-id="{{ task.id }}">Delete</a>
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>You're all caught up! Create a new task: <a href="{% url 'task_create' %}">Create!</a></p>
+            {% endif %}
+        </div>
+    </div>
+
 </main>
+{% endblock %}
+
 <script>
     // Attach event listeners to all delete buttons
-    document.querySelectorAll('.delete-btn').forEach(function(button) {
+    document.querySelectorAll('.btn-danger[data-task-id]').forEach(function(button) {
         button.addEventListener('click', function(event) {
-            event.preventDefault();  // Prevent the default link action (no redirect)
-
-            // Get the task ID from the data attribute
+            event.preventDefault();
             var taskId = button.getAttribute('data-task-id');
-
-            // Show a confirmation dialog
             var userConfirmed = confirm("Are you sure you want to delete this task?");
-
             if (userConfirmed) {
-                // If the user confirms, create a form and submit a POST request to delete the task
                 var form = document.createElement('form');
                 form.method = 'POST';
-                form.action = '{% url "task_delete" 0 %}'.replace('0', taskId);  // Replace with the correct task ID
-
-                // Add the CSRF token
+                form.action = '{% url "task_delete" 0 %}'.replace('0', taskId);
                 var csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
                 var csrfInput = document.createElement('input');
                 csrfInput.type = 'hidden';
                 csrfInput.name = 'csrfmiddlewaretoken';
                 csrfInput.value = csrfToken;
                 form.appendChild(csrfInput);
-
-                // Submit the form
                 document.body.appendChild(form);
                 form.submit();
             }
