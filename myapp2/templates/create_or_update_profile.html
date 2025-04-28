@@ -1,22 +1,45 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profile</title>
-</head>
-<body>
+{% extends "base.html" %}
 
-<h2>Welcome, {{ user.get_full_name }}!</h2>
+{% block title %}User Profile{% endblock %}
 
-<form method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Save Profile</button>
-</form>
+{% block content %}
+<div class="container">
+    <h2>Welcome, {{ user.get_full_name }}!</h2>
 
-<p>Don't forget to check your settings regularly!</p>
-<a href="{% url 'index' %}">Back to Homepage</a>
+    <!-- Profile Section -->
+    <div class="profile-info">
+        <div class="profile-image">
+            <!-- Display Profile Picture -->
+            <img src="{{ user.profile.profile_picture.url }}" alt="Profile Picture">
+        </div>
+        <div class="profile-details">
+            <p><strong>Name:</strong> {{ user.get_full_name }}</p>
+            <p><strong>Email:</strong> {{ user.email }}</p>
+            <p><strong>Bio:</strong> {{ user.profile.bio }}</p>
+        </div>
+    </div>
 
-</body>
-</html>
+    <!-- Profile Form for editing details -->
+    <div class="form-container">
+        <h3>Edit Profile</h3>
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            
+            <!-- Profile Picture Upload -->
+            <label for="profile_picture">Change Profile Picture:</label>
+            <input type="file" id="profile_picture" name="profile_picture">
+
+            <!-- Bio Input -->
+            <label for="bio">Bio:</label>
+            <textarea id="bio" name="bio" rows="4" placeholder="Tell us about yourself...">{{ user.profile.bio }}</textarea>
+
+            <!-- Save Button -->
+            <button type="submit">Save Profile</button>
+        </form>
+    </div>
+
+    <p class="back-link">
+        <a href="{% url 'index' %}">Back to Homepage</a>
+    </p>
+</div>
+{% endblock %}

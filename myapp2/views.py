@@ -65,7 +65,6 @@ def logout_view(request):
 
 @login_required
 def create_or_update_profile(request):
-
     # Try to get the profile if it exists, otherwise create it
     profile, created = UserProfile.objects.get_or_create(user=request.user)
 
@@ -77,7 +76,8 @@ def create_or_update_profile(request):
     else:
         form = UserProfileForm(instance=profile)
 
-    return render(request, 'create_or_update_profile.html', {'form': form})
+    # Pass additional context to the template
+    return render(request, 'create_or_update_profile.html', {'form': form, 'user': request.user, 'profile': profile})
 @login_required
 def task_list(request):
     user = request.user

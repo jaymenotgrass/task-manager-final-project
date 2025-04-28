@@ -26,24 +26,25 @@ class Task(models.Model):
         return self.title
     
 class UserProfile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    bio = models.TextField(blank=True, null=True)  # Optional bio field
-
+    # Choices for preferred view and theme
+    PREFERRED_VIEW_CHOICES = [
+        ('list', 'List View'),
+        ('grid', 'Grid View'),
+    ]
+    THEME_CHOICES = [
+        ('light', 'Light Theme'),
+        ('dark', 'Dark Theme'),
+    ]
     
-    preferred_view = models.CharField(
-        max_length=10,
-        choices=[('daily', 'Daily'), ('weekly', 'Weekly'), ('list', 'List')],
-        default='daily'
-    )
-    theme_preference = models.CharField(
-        max_length=10,
-        choices=[('light', 'Light'), ('dark', 'Dark')],
-        default='light'
-    )
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    profile_picture = models.ImageField(upload_to='profile_pics/', null=True, blank=True)
+    bio = models.TextField(null=True, blank=True)
+    preferred_view = models.CharField(max_length=10, choices=PREFERRED_VIEW_CHOICES, default='list')
+    theme_preference = models.CharField(max_length=5, choices=THEME_CHOICES, default='light')
     receive_notifications = models.BooleanField(default=True)
 
     def __str__(self):
-        return f'{self.user.username} Profile'
+        return self.user.username
     
 
 

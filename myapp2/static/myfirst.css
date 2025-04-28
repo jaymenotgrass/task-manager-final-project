@@ -341,6 +341,66 @@ a:hover {
   background-color: #fff;
 }
 
+.container {
+  width: 80%;
+  margin: auto;
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+h2 {
+  text-align: center;
+  color: #333;
+}
+.profile-info {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  padding: 10px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+}
+.profile-info div {
+  flex: 1;
+  padding: 10px;
+}
+.profile-info img {
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+}
+.form-container {
+  background-color: #f1f1f1;
+  padding: 20px;
+  border-radius: 8px;
+}
+.form-container form {
+  display: flex;
+  flex-direction: column;
+}
+.form-container input, .form-container button {
+  margin-bottom: 15px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+}
+.form-container button {
+  background-color: #4CAF50;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+.form-container button:hover {
+  background-color: #45a049;
+}
+.back-link {
+  display: block;
+  text-align: center;
+  margin-top: 20px;
+}
+
 
 
 
